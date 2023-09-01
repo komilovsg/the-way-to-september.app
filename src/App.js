@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import Loading from './components/Loading';
+
 
 const App = () => {
 const [countdown, setCountdown] = useState(null);
@@ -28,13 +30,14 @@ setCountdown(getRemainingTime());
 
 return () => clearInterval(interval);
 }, []);
-
 return (
   <div className='flex justify-center items-center h-screen'>
+    <Suspense fallback={<div><Loading/></div>}>
   <div className='text-center'>
   <h1 className='mb-4'>Счетчик до 8 сентября 2023 года, 18:00 осталось</h1>
   {countdown && <h2>{countdown}</h2>}
   </div>
+    </Suspense>
   </div>
   );
   };
